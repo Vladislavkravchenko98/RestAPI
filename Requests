@@ -1,0 +1,29 @@
+РАБОТА С ПРЕДМЕТАМИ:
+1)Кладем предмет ->  http://localhost:8092/addSubject -> Метод: POST -> Body -> raw:
+{"nameOfSubject": "Коробка", "active": "1"}
+2)Получаем список всех предметов -> http://localhost:8092/listOfSubject -> Метод: GET
+3)Замена предмета -> http://localhost:8092/replacement/{id} -> Метод: PUT -> Body -> raw:
+{"nameOfSubject": "Цветок", "active": "1"}
+4)Удаление предмета -> http://localhost:8092/delete/{id} -> Метод: DELETE
+
+РАБОТА СО СТУДЕНТАМИ:
+1)Кладем студента ->  http://localhost:8092/addStudent -> Метод: POST -> Body -> raw:
+{
+"name": "Paul", 
+"dayOfNewStudy": "{{currentdate}}",
+"massage": "Просто текст",
+"visit": "{{$isoTimestamp}}"
+}
+Работа с датами (Добавляем в Pre-request Script):
+var moment = require('moment');
+pm.environment.set('currentdate', moment().format(("YYYY-MM-DD")));
+2)Получаем список всех студентов -> http://localhost:8092/listOfStudents -> Метод: GET
+3)Заменяем студента -> http://localhost:8092/studentReplacement/{id} -> Метод: PUT
+4)Удаляем студента -> http://localhost:8092/deleteStudent/{id} -> Метод: DELETE
+
+РАБОТА С ЗАГРУЗКОЙ АВАТАРА(ИЗОБРАЖЕНИЯ):
+1)Загрузка картинки ->  http://localhost:8092/uploadFile/{id} -> Метод: POST -> Body -> form-data -> File(выбрать формат «файл» в выпадающем окне) ->select file(указать путь) -> В столбце «key» прописать "image"
+
+РАБОТА СО СТАТУСАМ ПОЛЬЗОВАТЕЛЯ(СТУДЕНТА):
+1)Положить статус ->  http://localhost:8092/editStutusById/{id} -> Метод: PUT-> Body -> form-data -> в столбце “key” прописать "status" -> Формат text
+2)Вывести список студентов в зависимости от их текущего статуса ->  http://localhost:8092/status -> Метод: GET
